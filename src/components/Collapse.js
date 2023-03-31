@@ -1,26 +1,58 @@
+// ilk constructor --> state initialization
+// render metodu ilk defa calisti
+// onClick eventi çalıştı
+// setState state nesnesini guncelledi --> triggered render
+// render metodu guncel JSX i sayfada gosteriyor
+
 import React from 'react';
 
 class Collapse extends React.Component { //Buradaki collapse classımız React componentdaki tüm özelliklere sahiptir.
 
-    constructor (props) {
-        super (props); //super ile React componenta ait olan constructor metodunu extend eder.(tüm özelliklerini alır)
-        this.state = {
-            showContent: "test content"
-        };
+    // constructor() {
+    //     super(); //super ile React componenta ait olan constructor metodunu extend eder.(tüm özelliklerini alır)
+    //     this.state = {
+    //         showContent: false //Başlangıçta collapse açık değil.
+    //     };
+    // }
+
+    //Aslıda başlangıç state bilgilerini constructor içinde tanımlamak yerine bu şekilde de tanımlayabiliriz.
+    state = {
+        showContent: false //Başlangıçta collapse açık değil.
     }
 
 
-    render () {
+    showMore = () => { //Burada da collapse açıp kapama işlemini yapıyoruz. 
+        this.setState({ //setState ile state nesnesini güncelliyoruz.
+            showContent: !this.state.showContent //Burada da state nesnesini güncelliyoruz.!Var olan durum neyse onun tersine göre değiştir.
+        });
+    }
+
+    // componentDidMount() { //Burada da collapse açıp kapama işlemini yapıyoruz.
+    //     console.log("componentDidMount");
+    // }
+
+    // componentDidUpdate() { //Burada da collapse açıp kapama işlemini yapıyoruz.
+    //     console.log("componentDidUpdate");
+    // }
+
+    render() {
         return (
             <div>
                 {/* "w-100": button %100 kapsıyor. */}
-                    <a class="btn btn-primary w-100" data-toggle="collapse" href={"#".concat(this.props.href)} role="button" aria-expanded="false" aria-controls="collapseExample">
-                        Link with href
-                    </a>
-                <div class="collapse show" id={this.props.href}>
-                    {this.props.children}
-                    {this.state.showContent} {/* Burada da this.props.children ile Card componentini çağırıyoruz. */}
-                </div>
+                <button className="btn btn-primary w-100" onClick={this.showMore}>
+                    {/* {this.props.children.props.cardTitle} */}
+                    {React.Children.map(this.props.children, (child) => { return child.props.cardTitle })} {/* Burada da Card componentinin cardTitle propunu çağırıyoruz. */}
+                </button>
+
+                {
+                    this.state.showContent ? //Burada da collapse açıp kapama işlemini yapıyoruz.
+                        <div className="collapse show">
+                            {/* {this.props.children} */}
+                            {React.Children.map(this.props.children, (child) => { return child } /* Burada da Card componentinin tüm proplarını çağırıyoruz. */)}
+                        </div>
+                        : null
+                }
+
             </div>
         );
     }

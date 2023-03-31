@@ -1,6 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-
+import { createRoot } from 'react-dom/client';
 import Card from './components/Card';
 import Collapse from './components/Collapse';
 
@@ -17,6 +16,18 @@ const App = () => {
           <div className="col">
 
             <Collapse href="collapseExample1">
+              <Card
+                cardText="Lorem Ipsum Text I"
+                updatedTime="Last Updated 1 min ago"
+                image="https://picsum.photos/id/1/200/300"
+              />
+            </Collapse>
+
+          </div>
+
+          <div className="col">
+
+          <Collapse href="collapseExample1">
               <Card
                 cardText="Lorem Ipsum Text I"
                 updatedTime="Last Updated 1 min ago"
@@ -57,7 +68,13 @@ const App = () => {
   );
 }
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
+
+createRoot(document.getElementById('root')).render(<App />);
+
+
+
+//Tarih olmuş
+// ReactDOM.render(
+//   <App />,
+//   document.getElementById('root')
+// );
