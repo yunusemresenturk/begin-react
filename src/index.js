@@ -1,35 +1,63 @@
-import {createRoot} from 'react-dom/client';
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 import Card from './components/Card';
+import Collapse from './components/Collapse';
 
 const App = () => {
+
+
   return (
-    <div>
-      <div className='card-group'>
+    <div className="container">
 
-        <Card
-          cardTitle="Card Title1 "
-          cardText="Lorem İpsum Text 1"
-          updatedTime="Last updated 1 min ago"
-          image="https://picsum.photos/id/1/200/300"
-        />
+      <div className="row">
 
-        <Card
-          cardTitle="Card Title1 "
-          cardText="Lorem İpsum Text 2"
-          updatedTime="Last updated 2 min ago"
-          image="https://picsum.photos/id/1/200/300"
-        />
-        <Card
-          cardTitle="Card Title1 "
-          cardText="Lorem İpsum Text 3"
-          updatedTime="Last updated 3 min ago"
-          image="https://picsum.photos/id/1/200/300"
-        />
+        <div className="card-group w-100">
 
+          <div className="col">
+
+            <Collapse href="collapseExample1">
+              <Card
+                cardText="Lorem Ipsum Text I"
+                updatedTime="Last Updated 1 min ago"
+                image="https://picsum.photos/id/1/200/300"
+              />
+            </Collapse>
+
+          </div>
+
+          <div className="col">
+
+            <Collapse href="collapseExample2">
+              <Card
+                cardTitle="TEST TITLEX"
+                cardText="Lorem Ipsum Text II"
+                updatedTime="Last Updated 2 min ago"
+                image="https://picsum.photos/id/2/200/300"
+              />
+            </Collapse>
+
+          </div>
+
+          <div className="col">
+
+            <Collapse href="collapseExample3">
+              <Card
+
+                cardText="Lorem Ipsum Text III"
+                updatedTime="Last Updated 3 min ago"
+                image="https://picsum.photos/id/3/200/300"
+              />
+            </Collapse>
+
+          </div>
+        </div>
       </div>
     </div>
   );
 }
 
-const root = createRoot(document.getElementById('root'));
-root.render(<App />);
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+);
